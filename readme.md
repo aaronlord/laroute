@@ -80,8 +80,13 @@ To access the routes, we need to "port" them over to a JavaScript file:
 php artisan generate:laroute
 ```
 
-With the default configuration, this will create a `public/js/laroute.min.js` file to include in your page, or build.
+With the default configuration, this will create a `public/js/laroute.js` file to include in your page, or build.
 
+```html
+<script src="/js/laroute.js"></script>
+```
+
+**Note: You'll have to `generate:laroute` if you change your routes.**
 
 ## JavaScript Documentation
 
