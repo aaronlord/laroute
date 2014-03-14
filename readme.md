@@ -74,7 +74,7 @@ With the default configuration, this will create a `public/js/laroute.min.js` fi
 By default, all of the functions are under the `laroute` namespace. This documentation will stick with this convention.
 
 
-#### action
+### action
 
 Generate a URL for a given controller action. 
 
@@ -89,7 +89,7 @@ Generate a URL for a given controller action.
 laroute.action('HomeController@getIndex');
 ```
 
-#### route
+### route
 
 Generate a URL for a given named route.
 
@@ -104,7 +104,7 @@ Generate a URL for a given named route.
  laroute.route('Hello.{planet}', { planet : 'world' });
 ```
 
-#### link_to
+### link_to
 
 Generate a html link to the given url.
 
@@ -120,7 +120,7 @@ Generate a html link to the given url.
  laroute.link_to('foo/bar', 'Foo Bar', { style : "color:#bada55;" });
 ```
 
-#### link_to_route
+### link_to_route
 
 Generate a html link to the given route.
 
@@ -137,7 +137,7 @@ Generate a html link to the given route.
  laroute.link_to_route('home', 'Home');
 ```
 
-#### link_to_action
+### link_to_action
 
 Generate a html link to the given action.
 
