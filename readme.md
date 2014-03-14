@@ -1,7 +1,5 @@
 # Laroute
 
----
-
 [Laravel](http://laravel.com/) has some pretty sweet [helper functions](http://laravel.com/docs/helpers#urls) for generating urls/links, it's auto-json-magic makes it building APIs super easy. It's my go-to choice for building single-page js apps.
 
 Wouldn't it be amazing if we could access our Laravel routes from JavasScript?
@@ -13,17 +11,16 @@ This package allows us to port our routes over to JavaScript, and gives us a bun
 Install the usual [composer](https://getcomposer.org/) way.
 
 ###### package.json
-```
+```json
 {
 	"require" : {
 		"lord/laroute" : "1.*"
 	}
-
 }
 ```
 
 ###### app/config/app.php
-```
+```php
 	...
 	
 	'providers' => array(
@@ -44,7 +41,7 @@ php artisan config:publish lord/laroute
 
 ###### app/config/packages/lord/laroute/config.php
 
-```
+```php
 <?php
 
 return array(
@@ -77,11 +74,11 @@ With the default configuration, this will create a `public/js/laroute.min.js` fi
 By default, all of the functions are under the `laroute` namespace. This documentation will stick with this convention.
 
 
-#### action
+### action
 
 Generate a URL for a given controller action. 
 
-```
+```js
 /** 
  * laroute.action(action, [parameters = {}])
  *
@@ -92,11 +89,11 @@ Generate a URL for a given controller action.
 laroute.action('HomeController@getIndex');
 ```
 
-#### route
+### route
 
 Generate a URL for a given named route.
 
-```
+```js
 /**
  * laroute.route(name, [parameters = {}])
  *
@@ -107,11 +104,11 @@ Generate a URL for a given named route.
  laroute.route('Hello.{planet}', { planet : 'world' });
 ```
 
-#### link_to
+### link_to
 
 Generate a html link to the given url.
 
-```
+```js
 /**
  * laroute.link_to(url, [title = url, attributes = {}]])
  *
@@ -123,11 +120,11 @@ Generate a html link to the given url.
  laroute.link_to('foo/bar', 'Foo Bar', { style : "color:#bada55;" });
 ```
 
-#### link_to_route
+### link_to_route
 
 Generate a html link to the given route.
 
-```
+```js
 /**
  * laroute.link_to_route(name, [title = url, parameters = {}], attributes = {}]]])
  *
@@ -140,11 +137,11 @@ Generate a html link to the given route.
  laroute.link_to_route('home', 'Home');
 ```
 
-#### link_to_action
+### link_to_action
 
 Generate a html link to the given action.
 
-```
+```js
 /**
  * laroute.link_to_action(action, [title = url, parameters = {}], attributes = {}]]])
  *
