@@ -90,7 +90,7 @@ class LarouteGeneratorCommand extends Command
     protected function getTemplateData()
     {
         $namespace = $this->getOptionOrConfig('namespace');
-        $routes    = json_encode($this->routes);
+        $routes    = $this->routes->toJSON();
 
         return compact('namespace', 'routes');
     }
