@@ -11,17 +11,16 @@ This package allows us to port our routes over to JavaScript, and gives us a bun
 Install the usual [composer](https://getcomposer.org/) way.
 
 ###### package.json
-```
+```json
 {
 	"require" : {
 		"lord/laroute" : "1.*"
 	}
-
 }
 ```
 
 ###### app/config/app.php
-```
+```php
 	...
 	
 	'providers' => array(
@@ -42,7 +41,7 @@ php artisan config:publish lord/laroute
 
 ###### app/config/packages/lord/laroute/config.php
 
-```
+```php
 <?php
 
 return array(
@@ -79,7 +78,7 @@ By default, all of the functions are under the `laroute` namespace. This documen
 
 Generate a URL for a given controller action. 
 
-```
+```js
 /** 
  * laroute.action(action, [parameters = {}])
  *
@@ -94,7 +93,7 @@ laroute.action('HomeController@getIndex');
 
 Generate a URL for a given named route.
 
-```
+```js
 /**
  * laroute.route(name, [parameters = {}])
  *
@@ -109,7 +108,7 @@ Generate a URL for a given named route.
 
 Generate a html link to the given url.
 
-```
+```js
 /**
  * laroute.link_to(url, [title = url, attributes = {}]])
  *
@@ -125,7 +124,7 @@ Generate a html link to the given url.
 
 Generate a html link to the given route.
 
-```
+```js
 /**
  * laroute.link_to_route(name, [title = url, parameters = {}], attributes = {}]]])
  *
@@ -142,7 +141,7 @@ Generate a html link to the given route.
 
 Generate a html link to the given action.
 
-```
+```js
 /**
  * laroute.link_to_action(action, [title = url, parameters = {}], attributes = {}]]])
  *
