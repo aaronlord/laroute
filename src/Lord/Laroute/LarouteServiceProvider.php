@@ -61,7 +61,7 @@ class LarouteServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'Lord\Laroute\Compilers\CompilerInterface',
-            'Lord\Laroute\Compilers\Templatecompiler'
+            'Lord\Laroute\Compilers\TemplateCompiler'
         );
     }
 
