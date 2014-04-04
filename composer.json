@@ -8,7 +8,7 @@
             "email": "hello@aaronlord.is"
         }
     ],
-    "licence" : "MIT",
+    "license" : "MIT",
     "require": {
         "php" : ">=5.3.0",
         "illuminate/support" : "4.1.*"
