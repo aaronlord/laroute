@@ -188,7 +188,7 @@ Route::get('/ignore-me', [
     'uses'    => 'IgnoreController@me'
 ]);
 
-Route::group(['laroute' => 'false'], function () {
+Route::group(['laroute' => false], function () {
     Route::get('/groups-are-super-useful', 'GroupsController@index');
 });
 
