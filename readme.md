@@ -175,6 +175,25 @@ Generate a html link to the given action.
  laroute.link_to_action('HelloController@planet', undefined, { planet : 'world' });
 ```
 
+## PHP Documentation
+
+### Ignore/Filter Routes
+
+By default, all routes are available to laroute after a `php artisan laroute:generate`. However, it is sometimes desirable to have laroute ignore certain routes. You can do this by passing a `laroute` route option.
+
+```php
+Route::get('/ignore-me', [
+    'laroute' => false,
+    'as'      => 'ignoreme',
+    'uses'    => 'IgnoreController@me'
+]);
+
+Route::group(['laroute' => false], function () {
+    Route::get('/groups-are-super-useful', 'GroupsController@index');
+});
+
+```
+
 
 ## Licence
 
