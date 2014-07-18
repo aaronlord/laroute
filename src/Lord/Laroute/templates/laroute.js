@@ -64,6 +64,21 @@
             }
         };
 
+        var getLinkAttributes = function(attributes) {
+            if ( ! attributes) {
+                return '';
+            }
+
+            attrs = [];
+            for (var key in attributes) {
+                if (attributes.hasOwnProperty(key)) {
+                    attrs.push(key + '="' + attributes[key] + '"');
+                }
+            }
+
+            return attrs.join(' ');
+        };
+
         return {
             // Generate a url for a given controller action.
             // $NAMESPACE$.action('HomeController@getIndex', [params = {}])
@@ -86,7 +101,7 @@
             link_to : function (url, title, attributes) {
                 url        = '/' + url.replace(/^\/?/, '');
                 title      = title || url;
-                attributes = this.getLinkAttributes(attributes);
+                attributes = getLinkAttributes(attributes);
 
                 return '<a href="' + url + '" ' + attributes + '>' + title + '</a>';
             },
@@ -113,21 +128,6 @@
                 attributes = attributes || {};
 
                 return this.link_to(uri, title, attributes);
-            },
-
-            getLinkAttributes : function(attributes) {
-                if ( ! attributes) {
-                    return '';
-                }
-
-                attrs = [];
-                for (var key in attributes) {
-                    if (attributes.hasOwnProperty(key)) {
-                        attrs.push(key + '="' + attributes[key] + '"');
-                    }
-                }
-
-                return attrs.join(' ');
             }
 
         };
