@@ -51,8 +51,17 @@ class TemplateGenerator implements GeneratorInterface
 
         $compiled = $this->compiler->compile($template, $templateData);
 
+        $this->makeDirectory(dirname($filePath));
+
         $this->filesystem->put($filePath, $compiled);
 
         return $filePath;
+    }
+
+    public function makeDirectory($directory)
+    {
+        if ( ! $this->filesystem->isDirectory($directory)) {
+            $this->filesystem->makeDirectory(dirname($filePath), 0777, true);
+        }
     }
 }
