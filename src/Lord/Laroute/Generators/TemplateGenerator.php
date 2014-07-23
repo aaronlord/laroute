@@ -61,7 +61,7 @@ class TemplateGenerator implements GeneratorInterface
     public function makeDirectory($directory)
     {
         if ( ! $this->filesystem->isDirectory($directory)) {
-            $this->filesystem->makeDirectory(dirname($directory), 0777, true);
+            $this->filesystem->makeDirectory($directory, 0777, true);
         }
     }
 }
