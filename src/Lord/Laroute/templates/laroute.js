@@ -23,13 +23,20 @@
             },
 
             replaceNamedParameters : function (uri, parameters) {
-                return uri.replace(/\{(.*?)\??\}/g, function(match, key) {
+                uri = uri.replace(/\{(.*?)\??\}/g, function(match, key) {
                     if (parameters.hasOwnProperty(key)) {
                         value = parameters[key];
                         delete parameters[key];
                         return value;
+                    } else {
+                        return match;
                     }
                 });
+
+                // Strip out any optional parameters that were not given
+                uri = uri.replace(/\/\{.*?\?\}/g, '');
+
+                return uri;
             },
 
             getRouteQueryString : function (parameters) {
