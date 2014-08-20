@@ -134,7 +134,20 @@
 
     }).call(this);
 
-    window.$NAMESPACE$ = laroute;
+    /**
+     * Expose the class either via AMD, CommonJS or the global object
+     */
+    if (typeof define === 'function' && define.amd) {
+        define(function () {
+            return laroute;
+        });
+    }
+    else if (typeof module === 'object' && module.exports){
+        module.exports = laroute;
+    }
+    else {
+        window.$NAMESPACE$ = laroute;
+    }
 
 }).call(this);
 
