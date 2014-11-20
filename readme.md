@@ -194,7 +194,33 @@ Route::group(['laroute' => false], function () {
 
 ```
 
+Another way to filter your routes is to set the ```filter``` option in config file so only the routes with specific key will be added to the laroute. Same key can be applied to group to add every route in it.
+###### app/config/packages/lord/laroute/config.php
+```php
+<?php
+return [
+    'filter' => 'jsroutes'
+];
+```
 
+###### app/routes.php
+```php
+Route::get('/i-will-be-added', [
+    'jsroutes' => true,
+    'as'      => 'route',
+    'uses'    => 'Controller@me'
+]);
+Route::get('/i-wont-be-added', [
+    'as'      => 'route',
+    'uses'    => 'Controller@me'
+]);
+Route::get('/i-wont-be-added-too', [
+    'jsroutes' => true,
+    'laroute' => false,
+    'as'      => 'route',
+    'uses'    => 'Controller@me'
+]);
+```
 ## Licence
 
 [View the licence in this repo.](https://github.com/aaronlord/laroute/blob/master/LICENSE)

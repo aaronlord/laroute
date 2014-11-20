@@ -2,6 +2,7 @@
 
 namespace Lord\Laroute\Routes;
 
+use Config;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
 use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
@@ -60,7 +61,11 @@ class Collection extends \Illuminate\Support\Collection
         $action  = $route->getActionName();
         $laroute = array_get($route->getAction(), 'laroute', true);
 
-        if ($laroute === false) {
+	    $filter = Config::get('laroute::config.filter');
+
+	    $routeHasFilter = array_get($route->getAction(), $filter, false);
+
+        if (($filter and !$routeHasFilter) or $laroute === false) {
             return null;
         }
 
