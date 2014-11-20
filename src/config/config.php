@@ -18,6 +18,13 @@ return array(
      */
     'namespace' => 'laroute',
 
+	/**
+	 * This allows to specify a filter for generated routes, if one is specified and you
+	 * add the filter to the route or group of routes only this routes will be added to file,
+	 * still, if route has laroute => false it will not be added
+	 */
+	'filter' => null,
+
     /**
      * The path to the template `laroute.js` file. This is the file that contains
      * the ported helper Laravel url/route functions and the route data to go
