@@ -1,6 +1,4 @@
-# Laroute for Laravel 5
-
-### For Laravel 4.x, check [version 1.3.2](https://github.com/aaronlord/laroute/tree/v1.3.2)
+# Laroute
 
 [Laravel](http://laravel.com/) has some pretty sweet [helper functions](http://laravel.com/docs/helpers#urls) for generating urls/links and its auto-json-magic makes it building APIs super easy. It's my go-to choice for building single-page js apps, but routing can quickly become a bit of a pain.
 
@@ -22,6 +20,8 @@ Install the usual [composer](https://getcomposer.org/) way.
 	}
 }
 ```
+
+n.b Laravel 4.x users, check out [version 1.3.2](https://github.com/aaronlord/laroute/tree/v1.3.2)
 
 ###### app/config/app.php
 ```php
