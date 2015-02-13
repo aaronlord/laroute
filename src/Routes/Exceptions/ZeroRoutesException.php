@@ -1,5 +1,5 @@
 <?php
 
-namespace Lord\Laroute\Exceptions;
+namespace Lord\Laroute\Routes\Exceptions;
 
 class ZeroRoutesException extends \Exception { }

@@ -4,7 +4,7 @@ namespace Lord\Laroute\Routes;
 
 use Mockery;
 
-class CollectionTest extends \TestCase
+class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     protected $routeCollection;
 
@@ -43,10 +43,10 @@ class CollectionTest extends \TestCase
         Mockery::close();
     }
 
-    protected function mock($class)
+    protected function mock($class, $app = [])
     {
-        $mock = Mockery::mock($class);
-        $this->app->instance($class, $mock);
+        $mock = Mockery::mock($class, $app);
+
         return $mock;
     }
 }

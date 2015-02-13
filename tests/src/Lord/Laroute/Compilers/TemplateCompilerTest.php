@@ -4,7 +4,7 @@ namespace Lord\Laroute\Compilers;
 
 use Mockery;
 
-class TemplateCompilerTest extends \TestCase
+class TemplateCompilerTest extends \PHPUnit_Framework_TestCase
 {
     protected $compiler;
 

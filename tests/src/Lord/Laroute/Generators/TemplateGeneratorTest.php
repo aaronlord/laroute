@@ -4,7 +4,7 @@ namespace Lord\Laroute\Generators;
 
 use Mockery;
 
-class TemplateGeneratorTest extends \TestCase
+class TemplateGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     protected $compiler;
 
@@ -43,6 +43,11 @@ class TemplateGeneratorTest extends \TestCase
             ->with($templatePath)
             ->andReturn($template);
 
+        $this->filesystem
+            ->shouldReceive('isDirectory')
+            ->once()
+            ->andReturn(true);
+
         $this->compiler
             ->shouldReceive('compile')
             ->once()
@@ -63,10 +68,10 @@ class TemplateGeneratorTest extends \TestCase
         Mockery::close();
     }
 
-    protected function mock($class)
+    protected function mock($class, $app = [])
     {
-        $mock = Mockery::mock($class);
-        $this->app->instance($class, $mock);
+        $mock = Mockery::mock($class, $app);
+
         return $mock;
     }
 }
