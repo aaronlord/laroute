@@ -1,4 +1,6 @@
-# Laroute
+# Laroute for Laravel 5
+
+### For Laravel 4.x, check [version 1.3.2](https://github.com/aaronlord/laroute/tree/v1.3.2)
 
 [Laravel](http://laravel.com/) has some pretty sweet [helper functions](http://laravel.com/docs/helpers#urls) for generating urls/links and its auto-json-magic makes it building APIs super easy. It's my go-to choice for building single-page js apps, but routing can quickly become a bit of a pain.
 
@@ -16,7 +18,7 @@ Install the usual [composer](https://getcomposer.org/) way.
 ```json
 {
 	"require" : {
-		"lord/laroute" : "1.*"
+		"lord/laroute" : "2.*"
 	}
 }
 ```
@@ -38,40 +40,65 @@ Install the usual [composer](https://getcomposer.org/) way.
 Copy the packages config files.
 
 ```
-php artisan config:publish lord/laroute
+php artisan vendor:publish
 ```
 
 ###### app/config/packages/lord/laroute/config.php
 
 ```php
-<?php
 
-return array(
+return [
 
-    /**
+    /*
      * The destination path for the javascript file.
      */
     'path' => 'public/js',
 
-    /**
+    /*
      * The destination filename for the javascript file.
      */
     'filename' => 'laroute',
 
-    /**
+    /*
      * The namespace for the helper functions. By default this will bind them to
      * `window.laroute`.
      */
     'namespace' => 'laroute',
 
-    /**
+    /*
+     * Generate absolute URLs
+     *
+     * Set the Application URL in config/app.php
+     */
+    'absolute' => false,
+
+    /*
+     * The Filter Methode
+     *
+     * 'all' => All routes except "'laroute' => false"
+     * 'only' => Only "'laroute' => true" routes
+     * 'force' => All routes, ignored "laroute" route parameter
+     */
+    'filter' => 'all',
+
+    /*
+     * Action Namespace
+     *
+     * Set here your controller namespace (see RouteServiceProvider -> $namespace) for cleaner action calls
+     * e.g. 'App\Http\Controllers'
+     */
+    'action_namespace' => '',
+
+    /*
      * The path to the template `laroute.js` file. This is the file that contains
      * the ported helper Laravel url/route functions and the route data to go
      * with them.
      */
-    'template' => 'vendor/lord/laroute/src/Lord/Laroute/templates/laroute.min.js',
+    'template' => 'vendor/lord/laroute/src/templates/laroute.js',
 
-);
+];
+
+    
 ```
 
 ### Generate the `laroute.js`
@@ -79,7 +106,7 @@ return array(
 To access the routes, we need to "port" them over to a JavaScript file:
 
 ```
-php artisan generate:laroute
+php artisan laroute:generate
 ```
 
 With the default configuration, this will create a `public/js/laroute.js` file to include in your page, or build.
@@ -88,7 +115,7 @@ With the default configuration, this will create a `public/js/laroute.js` file t
 <script src="/js/laroute.js"></script>
 ```
 
-**Note: You'll have to `generate:laroute` if you change your routes.**
+**Note: You'll have to `laroute:generate` if you change your routes.**
 
 ## JavaScript Documentation
 
@@ -123,6 +150,21 @@ Generate a URL for a given named route.
  */
  
  laroute.route('Hello.{planet}', { planet : 'world' });
+```
+
+### url
+
+Generate a fully qualified URL to the given path.
+
+```js
+/**
+ * laroute.url(name, [parameters = []])
+ *
+ * name       : The name of the route to route to.
+ * parameters : Optional. value array of route parameters.
+ */
+ 
+ laroute.url('foo/bar', ['aaa', 'bbb']); // -> /foo/bar/aaa/bbb
 ```
 
 ### link_to

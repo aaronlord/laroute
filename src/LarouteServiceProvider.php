@@ -3,18 +3,11 @@
 namespace Lord\Laroute;
 
 use Illuminate\Support\ServiceProvider;
+use Lord\Laroute\Console\Commands\LarouteGeneratorCommand;
 use Lord\Laroute\Routes\Collection as Routes;
-use Lord\Laroute\Commands\LarouteGeneratorCommand;
 
 class LarouteServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
     /**
      * Bootstrap the application events.
      *
@@ -22,7 +15,8 @@ class LarouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('lord/laroute');
+        $source = $this->getConfigPath();
+        $this->publishes([$source => config_path('laroute.php')], 'config');
     }
 
     /**
@@ -32,11 +26,24 @@ class LarouteServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $source = $this->getConfigPath();
+        $this->mergeConfigFrom($source, 'laroute');
+
         $this->registerGenerator();
 
         $this->registerCompiler();
 
         $this->registerCommand();
+    }
+
+    /**
+     * Get the config path
+     *
+     * @return string
+     */
+    protected function getConfigPath()
+    {
+        return realpath(__DIR__.'/../config/laroute.php');
     }
 
     /**
@@ -72,24 +79,16 @@ class LarouteServiceProvider extends ServiceProvider
      */
     protected function registerCommand()
     {
-        $this->app->bindShared('generate.laroute', function($app)
-        {
-            $routes    = new Routes($app['router']->getRoutes());
-            $generator = $app->make('Lord\Laroute\Generators\GeneratorInterface');
+        $this->app['command.laroute.generate'] = $this->app->share(
+            function ($app) {
+                $config     = $app['config'];
+                $routes     = new Routes($app['router']->getRoutes(), $config->get('laroute.filter', 'all'), $config->get('laroute.action_namespace', ''));
+                $generator  = $app->make('Lord\Laroute\Generators\GeneratorInterface');
 
-            return new LarouteGeneratorCommand($routes, $generator);
-        });
+                return new LarouteGeneratorCommand($config, $routes, $generator);
+            }
+        );
 
-        $this->commands('generate.laroute');
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return array();
+        $this->commands('command.laroute.generate');
     }
 }

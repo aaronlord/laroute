@@ -15,7 +15,11 @@ class TemplateCompiler implements CompilerInterface
     public function compile($template, $data)
     {
         foreach ($data as $key => $value) {
-            $key      = strtoupper($key);
+            $key = strtoupper($key);
+
+            if(is_bool($value))
+                $value = $value ? 'true' : 'false';
+
             $template = preg_replace("#\\$$key\\$#i", $value, $template);
         }
 

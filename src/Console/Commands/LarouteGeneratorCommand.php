@@ -1,13 +1,14 @@
 <?php
 
-namespace Lord\Laroute\Commands;
+namespace Lord\Laroute\Console\Commands;
 
-use Config;
-use Illuminate\Console\Command;
 use Lord\Laroute\Routes\Collection as Routes;
-use Symfony\Component\Console\Input\InputOption;
-use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
 use Lord\Laroute\Generators\GeneratorInterface as Generator;
+
+use Illuminate\Config\Repository as Config;
+use Illuminate\Console\Command;
+
+use Symfony\Component\Console\Input\InputOption;
 
 class LarouteGeneratorCommand extends Command
 {
@@ -16,7 +17,7 @@ class LarouteGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $name = 'generate:laroute';
+    protected $name = 'laroute:generate';
 
     /**
      * The console command description.
@@ -24,6 +25,13 @@ class LarouteGeneratorCommand extends Command
      * @var string
      */
     protected $description = 'Generate a laravel routes file';
+
+    /**
+     * Config
+     *
+     * @var Config
+     */
+    protected $config;
 
     /**
      * An array of all the registered routes.
@@ -42,20 +50,23 @@ class LarouteGeneratorCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @param Config $config
+     * @param Routes $routes
+     * @param Generator $generator
      */
-    public function __construct(Routes $routes, Generator $generator)
+    public function __construct(Config $config, Routes $routes, Generator $generator)
     {
-        parent::__construct();
-
+        $this->config    = $config;
         $this->routes    = $routes;
         $this->generator = $generator;
+
+        parent::__construct();
     }
 
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function fire()
     {
@@ -66,8 +77,8 @@ class LarouteGeneratorCommand extends Command
                 $this->getFileGenerationPath()
             );
 
-            return $this->info("Created: {$filePath}");
-        } catch (NoRoutesException $e) {
+            $this->info("Created: {$filePath}");
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
@@ -79,7 +90,7 @@ class LarouteGeneratorCommand extends Command
      */
     protected function getTemplatePath()
     {
-        return Config::get('laroute::config.template');
+        return $this->config->get('laroute.template');
     }
 
     /**
@@ -89,10 +100,12 @@ class LarouteGeneratorCommand extends Command
      */
     protected function getTemplateData()
     {
-        $namespace = $this->getOptionOrConfig('namespace');
-        $routes    = $this->routes->toJSON();
+        $namespace  = $this->getOptionOrConfig('namespace');
+        $routes     = $this->routes->toJSON();
+        $absolute   = $this->config->get('laroute.absolute', false);
+        $rootUrl    = $this->config->get('app.url', '');
 
-        return compact('namespace', 'routes');
+        return compact('namespace', 'routes', 'absolute', 'rootUrl');
     }
 
 
@@ -111,6 +124,10 @@ class LarouteGeneratorCommand extends Command
 
     /**
      * Get an option value either from console input, or the config files.
+     *
+     * @param $key
+     *
+     * @return array|mixed|string
      */
     protected function getOptionOrConfig($key)
     {
@@ -118,7 +135,7 @@ class LarouteGeneratorCommand extends Command
             return $option;
         }
 
-        return Config::get("laroute::config.{$key}");
+        return $this->config->get("laroute.{$key}");
     }
 
     /**
@@ -128,24 +145,24 @@ class LarouteGeneratorCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array(
+        return [
+            [
                 'path',
                 'p',
                 InputOption::VALUE_OPTIONAL,
-                sprintf('Path to the javscript assets directory (default: "%s")', Config::get('laroute::config.path'))
-            ),
-            array(
+                sprintf('Path to the javscript assets directory (default: "%s")', $this->config->get('laroute.path'))
+            ],
+            [
                 'filename',
                 'f',
                 InputOption::VALUE_OPTIONAL,
-                sprintf('Filename of the javascript file (default: "%s")', Config::get('laroute::config.filename'))
-            ),
-            array(
+                sprintf('Filename of the javascript file (default: "%s")', $this->config->get('laroute.filename'))
+            ],
+            [
                 'namespace',
                 null,
-                InputOption::VALUE_OPTIONAL, sprintf('Javascript namespace for the functions (think _.js) (default: "%s")', Config::get('laroute::config.namespace'))
-            ),
-        );
+                InputOption::VALUE_OPTIONAL, sprintf('Javascript namespace for the functions (think _.js) (default: "%s")', $this->config->get('laroute.namespace'))
+            ],
+        ];
     }
 }

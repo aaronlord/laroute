@@ -4,6 +4,8 @@
 
         var routes = {
 
+            absolute: $ABSOLUTE$,
+            rootUrl: '$ROOTURL$',
             routes : $ROUTES$,
 
             route : function (name, parameters, route) {
@@ -16,16 +18,25 @@
                 return this.toRoute(route, parameters);
             },
 
+            url: function (url, parameters) {
+                parameters = parameters || [];
+
+                var uri = url + '/' + parameters.join('/');
+
+                return this.getCorrectUrl(uri);
+            },
+
             toRoute : function (route, parameters) {
-                uri = this.replaceNamedParameters(route.uri, parameters);
-                qs  = this.getRouteQueryString(parameters);
-                return '/' + uri.replace(/^\/?/, '') + qs;
+                var uri = this.replaceNamedParameters(route.uri, parameters);
+                var qs  = this.getRouteQueryString(parameters);
+
+                return this.getCorrectUrl(uri + qs);
             },
 
             replaceNamedParameters : function (uri, parameters) {
                 uri = uri.replace(/\{(.*?)\??\}/g, function(match, key) {
                     if (parameters.hasOwnProperty(key)) {
-                        value = parameters[key];
+                        var value = parameters[key];
                         delete parameters[key];
                         return value;
                     } else {
@@ -40,7 +51,7 @@
             },
 
             getRouteQueryString : function (parameters) {
-                qs = [];
+                var qs = [];
                 for (var key in parameters) {
                     if (parameters.hasOwnProperty(key)) {
                         qs.push(key + '=' + parameters[key]);
@@ -68,6 +79,15 @@
                         return this.routes[key];
                     }
                 }
+            },
+
+            getCorrectUrl: function (uri) {
+                var url = '/' + uri.replace(/^\/?/, '');
+
+                if(!this.absolute)
+                    return url;
+
+                return this.rootUrl.replace('/\/?$/', '') + url;
             }
         };
 
@@ -76,7 +96,7 @@
                 return '';
             }
 
-            attrs = [];
+            var attrs = [];
             for (var key in attributes) {
                 if (attributes.hasOwnProperty(key)) {
                     attrs.push(key + '="' + attributes[key] + '"');
@@ -84,6 +104,13 @@
             }
 
             return attrs.join(' ');
+        };
+
+        var getHtmlLink = function (url, title, attributes) {
+            title      = title || url;
+            attributes = getLinkAttributes(attributes);
+
+            return '<a href="' + url + '" ' + attributes + '>' + title + '</a>';
         };
 
         return {
@@ -103,38 +130,36 @@
                 return routes.route(route, parameters);
             },
 
+            // Generate a fully qualified URL to the given path.
+            // $NAMESPACE$.route('url', [params = {}])
+            url : function (route, parameters) {
+                parameters = parameters || {};
+
+                return routes.url(route, parameters);
+            },
+
             // Generate a html link to the given url.
             // $NAMESPACE$.link_to('foo/bar', [title = url], [attributes = {}])
             link_to : function (url, title, attributes) {
-                url        = '/' + url.replace(/^\/?/, '');
-                title      = title || url;
-                attributes = getLinkAttributes(attributes);
+                url = this.url(url);
 
-                return '<a href="' + url + '" ' + attributes + '>' + title + '</a>';
+                return getHtmlLink(url, title, attributes);
             },
 
             // Generate a html link to the given route.
             // $NAMESPACE$.link_to_route('route.name', [title=url], [parameters = {}], [attributes = {}])
             link_to_route : function (route, title, parameters, attributes) {
-                uri = this.route(route, parameters);
+                var url = this.route(route, parameters);
 
-                title      = title || uri;
-                parameters = parameters || {};
-                attributes = attributes || {};
-
-                return this.link_to(uri, title, attributes);
+                return getHtmlLink(url, title, attributes);
             },
 
             // Generate a html link to the given controller action.
             // $NAMESPACE$.link_to_action('HomeController@getIndex', [title=url], [parameters = {}], [attributes = {}])
             link_to_action : function(action, title, parameters, attributes) {
-                uri = this.action(action, parameters);
+                var url = this.action(action, parameters);
 
-                title      = title || uri;
-                parameters = parameters || {};
-                attributes = attributes || {};
-
-                return this.link_to(uri, title, attributes);
+                return getHtmlLink(url, title, attributes);
             }
 
         };

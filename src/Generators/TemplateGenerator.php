@@ -27,7 +27,6 @@ class TemplateGenerator implements GeneratorInterface
      * @param $compiler   \Lord\Laroute\Compilers\CompilerInterface
      * @param $filesystem \Illuminate\Filesystem\Filesystem
      *
-     * @return void
      */
     public function __construct(Compiler $compiler, Filesystem $filesystem)
     {
