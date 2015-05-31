@@ -7,6 +7,7 @@
             absolute: $ABSOLUTE$,
             rootUrl: '$ROOTURL$',
             routes : $ROUTES$,
+            prefix: '$PREFIX$',
 
             route : function (name, parameters, route) {
                 route = route || this.getByName(name);
@@ -82,7 +83,7 @@
             },
 
             getCorrectUrl: function (uri) {
-                var url = '/' + uri.replace(/^\/?/, '');
+                var url = this.prefix + '/' + uri.replace(/^\/?/, '');
 
                 if(!this.absolute)
                     return url;
