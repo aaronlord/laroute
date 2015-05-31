@@ -106,7 +106,7 @@ class LarouteGeneratorCommand extends Command
         $rootUrl    = $this->config->get('app.url', '');
         $prefix		= $this->config->get('laroute.prefix', '');
 
-        return compact('namespace', 'routes', 'absolute', 'rootUrl');
+        return compact('namespace', 'routes', 'absolute', 'rootUrl', 'prefix');
     }
 
 
