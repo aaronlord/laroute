@@ -160,6 +160,16 @@
                 var url = this.action(action, parameters);
 
                 return getHtmlLink(url, title, attributes);
+            },
+
+            // Reset the rootUrl value
+            // $NAMESPACE$.set_root_url('url')
+            set_root_url : function(url) {
+                if (typeof url === "undefined" || !url) {
+                    return;
+                }
+
+                routes.rootUrl = url;
             }
 
         };
