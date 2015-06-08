@@ -1,5 +1,5 @@
 {
-    "name": "kryten0807/laroute",
+    "name": "lord/laroute",
     "description": "Access Laravels URL/Route helper functions, from JavaScript.",
     "keywords"  : ["laravel", "routes", "routing", "javascript"],
     "authors": [
