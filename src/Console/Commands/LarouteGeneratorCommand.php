@@ -104,8 +104,9 @@ class LarouteGeneratorCommand extends Command
         $routes     = $this->routes->toJSON();
         $absolute   = $this->config->get('laroute.absolute', false);
         $rootUrl    = $this->config->get('app.url', '');
+        $prefix		= $this->config->get('laroute.prefix', '');
 
-        return compact('namespace', 'routes', 'absolute', 'rootUrl');
+        return compact('namespace', 'routes', 'absolute', 'rootUrl', 'prefix');
     }
 
 
@@ -162,6 +163,11 @@ class LarouteGeneratorCommand extends Command
                 'namespace',
                 null,
                 InputOption::VALUE_OPTIONAL, sprintf('Javascript namespace for the functions (think _.js) (default: "%s")', $this->config->get('laroute.namespace'))
+            ],
+            [
+                'prefix',
+                'pr',
+                InputOption::VALUE_OPTIONAL, sprintf('Prefix for the generated URLs (default: "%s")', $this->config->get('laroute.prefix'))
             ],
         ];
     }

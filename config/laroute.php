@@ -48,5 +48,11 @@ return [
      * with them.
      */
     'template' => 'vendor/lord/laroute/src/templates/laroute.js',
+    
+    /*
+     * Appends a prefix to URLs. By default the prefix is an empty string.
+    *
+    */
+    'prefix' => '',
 
 ];
