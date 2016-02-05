@@ -9,6 +9,10 @@
             routes : $ROUTES$,
             prefix: '$PREFIX$',
 
+            setRootUrl : function (url) {
+                this.rootUrl = url;
+            },
+
             route : function (name, parameters, route) {
                 route = route || this.getByName(name);
 
@@ -161,6 +165,12 @@
                 var url = this.action(action, parameters);
 
                 return getHtmlLink(url, title, attributes);
+            },
+
+            // Set a base url for all routes.
+            // $NAMESPACE$.set_root_url('http://localhost')
+            set_root_url : function (url) {
+                routes.setRootUrl(url);
             }
 
         };
