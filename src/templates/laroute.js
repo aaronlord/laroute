@@ -23,15 +23,23 @@
                 parameters = parameters || [];
 
                 var uri = url + '/' + parameters.join('/');
+                uri = this.prefix + '/' + uri.replace(/^\/?/, '');
 
-                return this.getCorrectUrl(uri);
+                if (!this.absolute) {
+                    return uri;
+                }
+
+                return this.rootUrl.replace('/\/?$/', '') + url;
             },
 
             toRoute : function (route, parameters) {
+                var domain = this.getRouteDomain(route);
+
+                var root = this.absolute ? this.replaceRoot(domain, parameters) : '';
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
-                return this.getCorrectUrl(uri + qs);
+                return root + '/' + uri + qs;
             },
 
             replaceNamedParameters : function (uri, parameters) {
@@ -66,6 +74,26 @@
                 return '?' + qs.join('&');
             },
 
+            getRouteDomain: function (route) {
+                if (route.host) {
+                    domain = location.protocol + '//' + route.host;
+
+                    if (location.port) {
+                        domain += ':' + location.port;
+                    }
+
+                    return domain;
+                } else {
+                    return null;
+                }
+            },
+
+            replaceRoot: function (domain, parameters) {
+                domain = domain || this.rootUrl;
+
+                return this.replaceNamedParameters(domain, parameters);
+            },
+
             getByName : function (name) {
                 for (var key in this.routes) {
                     if (this.routes.hasOwnProperty(key) && this.routes[key].name === name) {
@@ -81,15 +109,6 @@
                     }
                 }
             },
-
-            getCorrectUrl: function (uri) {
-                var url = this.prefix + '/' + uri.replace(/^\/?/, '');
-
-                if(!this.absolute)
-                    return url;
-
-                return this.rootUrl.replace('/\/?$/', '') + url;
-            }
         };
 
         var getLinkAttributes = function(attributes) {
@@ -183,4 +202,3 @@
     }
 
 }).call(this);
-
