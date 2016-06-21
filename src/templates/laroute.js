@@ -34,7 +34,15 @@
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
-                return root + '/' + uri + qs;
+                route = root + '/';
+
+                if (this.prefix !== undefined && this.prefix !== '') {
+                    route += this.prefix + '/';
+                }
+
+                route += uri + qs;
+
+                return route;
             },
 
             replaceNamedParameters : function (uri, parameters) {
