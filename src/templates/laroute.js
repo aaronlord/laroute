@@ -23,13 +23,8 @@
                 parameters = parameters || [];
 
                 var uri = url + '/' + parameters.join('/');
-                uri = this.prefix + '/' + uri.replace(/^\/?/, '');
 
-                if (!this.absolute) {
-                    return uri;
-                }
-
-                return this.rootUrl.replace('/\/?$/', '') + url;
+                return this.getCorrectUrl(uri);
             },
 
             toRoute : function (route, parameters) {
@@ -109,6 +104,15 @@
                     }
                 }
             },
+
+            getCorrectUrl: function (uri) {
+                var url = this.prefix + '/' + uri.replace(/^\/?/, '');
+
+                if(!this.absolute)
+                    return url;
+
+                return this.rootUrl.replace('/\/?$/', '') + url;
+            }
         };
 
         var getLinkAttributes = function(attributes) {
