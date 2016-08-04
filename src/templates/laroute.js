@@ -34,8 +34,13 @@
                 return this.getCorrectUrl(uri + qs);
             },
 
-            replaceNamedParameters : function (uri, parameters) {
-                uri = uri.replace(/\{(.*?)\??\}/g, function(match, key) {
+            replaceNamedParameters : function(uri, parameters) {
+                var regex = /\{(.*?)\??\}/g;
+                if (typeof parameters === 'string' || typeof parameters === 'number')
+                    regex = /\{(.*?)\??\}/;
+                uri = uri.replace(regex, function(match, key) {
+                    if (typeof parameters === 'string' || typeof parameters === 'number')
+                        return parameters;
                     if (parameters.hasOwnProperty(key)) {
                         var value = parameters[key];
                         delete parameters[key];
@@ -52,6 +57,8 @@
             },
 
             getRouteQueryString : function (parameters) {
+                if (typeof parameters === 'string' || typeof parameters === 'number')
+                    return '';
                 var qs = [];
                 for (var key in parameters) {
                     if (parameters.hasOwnProperty(key)) {
