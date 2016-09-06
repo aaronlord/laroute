@@ -134,8 +134,6 @@
             // Generate a fully qualified URL to the given path.
             // $NAMESPACE$.route('url', [params = {}])
             url : function (route, parameters) {
-                parameters = parameters || {};
-
                 return routes.url(route, parameters);
             },
 
