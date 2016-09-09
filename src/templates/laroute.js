@@ -159,7 +159,11 @@
                 var url = this.action(action, parameters);
 
                 return getHtmlLink(url, title, attributes);
-            }
+            },
+            
+            getAllRoutes : function() {
+                return routes.routes;
+            },
 
         };
 
