@@ -28,10 +28,21 @@
             },
 
             toRoute : function (route, parameters) {
+                var domain = this.getRouteDomain(route);
+
+                var root = this.absolute ? this.replaceRoot(domain, parameters) : '';
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
-                return this.getCorrectUrl(uri + qs);
+                route = root + '/';
+
+                if (this.prefix !== undefined && this.prefix !== '') {
+                    route += this.prefix + '/';
+                }
+
+                route += uri + qs;
+
+                return route;
             },
 
             replaceNamedParameters : function (uri, parameters) {
@@ -64,6 +75,26 @@
                 }
 
                 return '?' + qs.join('&');
+            },
+
+            getRouteDomain: function (route) {
+                if (route.host) {
+                    domain = location.protocol + '//' + route.host;
+
+                    if (location.port) {
+                        domain += ':' + location.port;
+                    }
+
+                    return domain;
+                } else {
+                    return null;
+                }
+            },
+
+            replaceRoot: function (domain, parameters) {
+                domain = domain || this.rootUrl;
+
+                return this.replaceNamedParameters(domain, parameters);
             },
 
             getByName : function (name) {
@@ -183,4 +214,3 @@
     }
 
 }).call(this);
-
