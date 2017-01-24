@@ -62,7 +62,7 @@ class Collection extends \Illuminate\Support\Collection
     protected function getRouteInformation(Route $route, $filter, $namespace)
     {
         $host    = $route->domain();
-        $methods = $route->getMethods();
+        $methods = $route->methods();
         $uri     = $route->uri();
         $name    = $route->getName();
         $action  = $route->getActionName();
