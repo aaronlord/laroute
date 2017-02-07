@@ -31,7 +31,15 @@
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
-                return this.getCorrectUrl(uri + qs);
+                if(this.isOtherHost(route)){
+                    return "//" + route.host + "/" + uri + qs;
+                }
+
+                return this.getCorrectUrl(host + uri + qs);
+            },
+
+            isOtherHost: function (route){
+                return route.host != window.location.hostname;
             },
 
             replaceNamedParameters : function (uri, parameters) {
