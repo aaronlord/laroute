@@ -35,7 +35,7 @@
                     return "//" + route.host + "/" + uri + qs;
                 }
 
-                return this.getCorrectUrl(host + uri + qs);
+                return this.getCorrectUrl(uri + qs);
             },
 
             isOtherHost: function (route){
