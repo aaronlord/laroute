@@ -169,6 +169,30 @@
                 var url = this.action(action, parameters);
 
                 return getHtmlLink(url, title, attributes);
+            },
+
+            // Whether we're using absolute URLs or not.
+            // $NAMESPACE$.set_absolute(true)
+            set_absolute : function (absolute) {
+                routes.absolute = absolute;
+            },
+
+            // Set a base url for all routes.
+            // $NAMESPACE$.set_root_url('http://localhost')
+            set_root_url : function (url) {
+                routes.rootUrl = url;
+            },
+
+            // JSON encoded route collection.
+            // $NAMESPACE$.set_routes([])
+            set_routes : function (json) {
+                routes.routes = json;
+            },
+
+            // Add a prefix to all URLs.
+            // $NAMEPSACE$.set_prefix('my-prefix')
+            set_prefix : function (prefix) {
+                routes.prefix = prefix;
             }
 
         };
