@@ -26,6 +26,12 @@ return [
     'absolute' => false,
 
     /*
+     * Generate secure absolute URLs (requires absolute=true)
+     * This will determine which scheme to use on your routes (http or https)
+     */
+    'secure_url' => true,
+
+    /*
      * The Filter Method
      *
      * 'all' => All routes except "'laroute' => false"

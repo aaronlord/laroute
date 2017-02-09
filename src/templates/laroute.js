@@ -5,6 +5,7 @@
         var routes = {
 
             absolute: $ABSOLUTE$,
+            secureUrl: $SECUREURL$,
             rootUrl: '$ROOTURL$',
             routes : $ROUTES$,
             prefix: '$PREFIX$',
@@ -32,7 +33,7 @@
                 var qs  = this.getRouteQueryString(parameters);
 
                 if (this.absolute && this.isOtherHost(route)){
-                    return "//" + route.host + "/" + uri + qs;
+                    return this.getScheme() + route.host + "/" + uri + qs;
                 }
 
                 return this.getCorrectUrl(uri + qs);
@@ -40,6 +41,10 @@
 
             isOtherHost: function (route){
                 return route.host && route.host != window.location.hostname;
+            },
+
+            getScheme: function (){
+                return this.secureUrl ? "https://" : "http://";
             },
 
             replaceNamedParameters : function (uri, parameters) {
