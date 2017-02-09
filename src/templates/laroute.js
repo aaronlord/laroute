@@ -31,7 +31,7 @@
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
-                if(this.isOtherHost(route)){
+                if (this.absolute && this.isOtherHost(route)){
                     return "//" + route.host + "/" + uri + qs;
                 }
 
@@ -39,7 +39,7 @@
             },
 
             isOtherHost: function (route){
-                return route.host != window.location.hostname;
+                return route.host && route.host != window.location.hostname;
             },
 
             replaceNamedParameters : function (uri, parameters) {
@@ -93,8 +93,9 @@
             getCorrectUrl: function (uri) {
                 var url = this.prefix + '/' + uri.replace(/^\/?/, '');
 
-                if(!this.absolute)
+                if ( ! this.absolute) {
                     return url;
+                }
 
                 return this.rootUrl.replace('/\/?$/', '') + url;
             }
