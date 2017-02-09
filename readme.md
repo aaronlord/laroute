@@ -12,7 +12,7 @@ This package allows us to port our routes over to JavaScript, and gives us a bun
 
 Install the usual [composer](https://getcomposer.org/) way.
 
-###### package.json
+###### composer.json
 ```json
 {
 	"require" : {
