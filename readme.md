@@ -6,7 +6,7 @@ Wouldn't it be amazing if we could access our Laravel routes from JavaScript?
 
 This package allows us to port our routes over to JavaScript, and gives us a bunch of _very familiar_ helper functions to use.
 
-![Laroute in action](laroute.png)
+![Laroute in action](https://cloud.githubusercontent.com/assets/11269635/22863666/e090ab1a-f144-11e6-8be4-5109bcf72654.png)
 
 ## Installation
 
