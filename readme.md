@@ -15,9 +15,9 @@ Install the usual [composer](https://getcomposer.org/) way.
 ###### composer.json
 ```json
 {
-	"require" : {
-		"lord/laroute" : "2.*"
-	}
+    "require" : {
+        "lord/laroute" : "2.*"
+    }
 }
 ```
 
@@ -25,14 +25,14 @@ n.b Laravel 4.x users, check out [version 1.3.2](https://github.com/aaronlord/la
 
 ###### app/config/app.php
 ```php
-	...
-	
-	'providers' => array(
-		...
-		Lord\Laroute\LarouteServiceProvider::class,
-	],
-	
-	...
+    ...
+    
+    'providers' => array(
+        ...
+        Lord\Laroute\LarouteServiceProvider::class,
+    ],
+    
+    ...
 ```
 
 ### Configure (optional)
@@ -46,33 +46,32 @@ php artisan vendor:publish --provider='Lord\Laroute\LarouteServiceProvider'
 ###### app/config/packages/lord/laroute/config.php
 
 ```php
-
 return [
 
-    /*
+    /**
      * The destination path for the javascript file.
      */
     'path' => 'public/js',
 
-    /*
+    /**
      * The destination filename for the javascript file.
      */
     'filename' => 'laroute',
 
-    /*
+    /**
      * The namespace for the helper functions. By default this will bind them to
      * `window.laroute`.
      */
     'namespace' => 'laroute',
 
-    /*
+    /**
      * Generate absolute URLs
      *
      * Set the Application URL in config/app.php
      */
     'absolute' => false,
 
-    /*
+    /**
      * The Filter Methode
      *
      * 'all' => All routes except "'laroute' => false"
@@ -81,7 +80,7 @@ return [
      */
     'filter' => 'all',
 
-    /*
+    /**
      * Action Namespace
      *
      * Set here your controller namespace (see RouteServiceProvider -> $namespace) for cleaner action calls
@@ -89,22 +88,20 @@ return [
      */
     'action_namespace' => '',
 
-    /*
+    /**
      * The path to the template `laroute.js` file. This is the file that contains
      * the ported helper Laravel url/route functions and the route data to go
      * with them.
      */
     'template' => 'vendor/lord/laroute/src/templates/laroute.js',
     
-    /*
+    /**
      * Appends a prefix to URLs. By default the prefix is an empty string.
-    *
-    */
+     */
     'prefix' => '',
 
 ];
 
-    
 ```
 
 ### Generate the `laroute.js`
@@ -241,7 +238,6 @@ Route::group(['laroute' => false], function () {
 });
 
 ```
-
 
 ## Licence
 
