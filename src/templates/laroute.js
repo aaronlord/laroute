@@ -10,14 +10,14 @@
             routes : $ROUTES$,
             prefix: '$PREFIX$',
 
-            route : function (name, parameters, route) {
+            route : function (name, parameters, route, forceAbsolute) {
                 route = route || this.getByName(name);
 
                 if ( ! route ) {
                     return undefined;
                 }
 
-                return this.toRoute(route, parameters);
+                return this.toRoute(route, parameters, forceAbsolute);
             },
 
             url: function (url, parameters) {
@@ -28,15 +28,16 @@
                 return this.getCorrectUrl(uri);
             },
 
-            toRoute : function (route, parameters) {
+            toRoute : function (route, parameters, forceAbsolute) {
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
-                if (this.absolute && this.isOtherHost(route)){
-                    return this.getScheme() + route.host + "/" + uri + qs;
+                var path = this.getCorrectUrl(uri + qs);
+                if(this.absolute || forceAbsolute){
+                    return this.getCorrectAbsoluteUrl(path, route, forceAbsolute);
                 }
 
-                return this.getCorrectUrl(uri + qs);
+                return path;
             },
 
             isOtherHost: function (route){
@@ -95,14 +96,16 @@
                 }
             },
 
+            getCorrectAbsoluteUrl: function (path, route, forceAbsolute) {
+                if (this.isOtherHost(route) || (route.host && forceAbsolute)){
+                    return this.getScheme() + route.host + "/" + path;
+                }
+                return this.rootUrl.replace('/\/?$/', '') + path;
+            },
+
             getCorrectUrl: function (uri) {
                 var url = this.prefix + '/' + uri.replace(/^\/?/, '');
-
-                if ( ! this.absolute) {
-                    return url;
-                }
-
-                return this.rootUrl.replace('/\/?$/', '') + url;
+                return url;
             }
         };
 
@@ -143,6 +146,12 @@
                 parameters = parameters || {};
 
                 return routes.route(route, parameters);
+            },
+
+            absoluteRoute : function (route, parameters) {
+                parameters = parameters || {};
+
+                return routes.route(route, parameters, true);
             },
 
             // Generate a fully qualified URL to the given path.
