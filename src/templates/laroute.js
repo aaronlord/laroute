@@ -140,18 +140,19 @@
                 return routes.route(name, parameters, routes.getByAction(name));
             },
 
-            // Generate a url for a given named route.
+            // Generate an url for a given named route.
             // $NAMESPACE$.route('routeName', [params = {}])
             route : function (route, parameters) {
                 parameters = parameters || {};
 
                 return routes.route(route, parameters);
             },
-
+            // Generate an absolute url for a given named route.
+            // $NAMESPACE$.absoluteRoute('routeName', [params = {}])
             absoluteRoute : function (route, parameters) {
                 parameters = parameters || {};
 
-                return routes.route(route, parameters, true);
+                return routes.route(route, parameters, false, true);
             },
 
             // Generate a fully qualified URL to the given path.
