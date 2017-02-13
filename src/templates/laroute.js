@@ -98,7 +98,7 @@
 
             getCorrectAbsoluteUrl: function (path, route, forceAbsolute) {
                 if (this.isOtherHost(route) || (route.host && forceAbsolute)){
-                    return this.getScheme() + route.host + "/" + path;
+                    return this.getScheme() + route.host + path;
                 }
                 return this.rootUrl.replace('/\/?$/', '') + path;
             },
