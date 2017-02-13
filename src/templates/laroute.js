@@ -33,7 +33,7 @@
                 var qs  = this.getRouteQueryString(parameters);
 
                 var path = this.getCorrectUrl(uri + qs);
-                if(this.absolute || forceAbsolute){
+                if(this.absolute || forceAbsolute || this.isOtherHost(route)){
                     return this.getCorrectAbsoluteUrl(path, route, forceAbsolute);
                 }
 
