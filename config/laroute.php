@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * The destination path for the javascript file.
      */
@@ -48,11 +47,16 @@ return [
      * with them.
      */
     'template' => 'vendor/lord/laroute/src/templates/laroute.js',
-    
+
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.
     *
     */
     'prefix' => '',
 
+    /*
+     * what to exclude from the output file
+     * ex. ['action', 'methods', 'host']
+     */
+    'exclude' => [],
 ];
