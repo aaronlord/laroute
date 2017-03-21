@@ -85,7 +85,9 @@ class Collection extends \Illuminate\Support\Collection
                 break;
         }
 
-        return compact('host', 'methods', 'uri', 'name', 'action');
+        $items = ['host', 'methods', 'uri', 'action', 'name'];
+
+        return compact(array_diff($items, config('laroute.exclude')));
     }
 
 }
