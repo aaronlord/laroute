@@ -37,9 +37,11 @@
 
                 return this.getCorrectUrl(uri + qs);
             },
+
             isOtherHost: function (route){
                 return route.host && route.host != window.location.hostname;
             },
+            
             replaceNamedParameters : function(uri, parameters) {
                 var regex = /\{(.*?)\??\}/g;
                 if (typeof parameters === 'string' || typeof parameters === 'number')
