@@ -79,7 +79,8 @@ class LarouteServiceProvider extends ServiceProvider
      */
     protected function registerCommand()
     {
-        $this->app['command.laroute.generate'] = $this->app->share(
+        $this->app->singleton(
+            'command.laroute.generate',
             function ($app) {
                 $config     = $app['config'];
                 $routes     = new Routes($app['router']->getRoutes(), $config->get('laroute.filter', 'all'), $config->get('laroute.action_namespace', ''));

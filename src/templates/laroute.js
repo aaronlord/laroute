@@ -31,9 +31,15 @@
                 var uri = this.replaceNamedParameters(route.uri, parameters);
                 var qs  = this.getRouteQueryString(parameters);
 
+                if (this.absolute && this.isOtherHost(route)){
+                    return "//" + route.host + "/" + uri + qs;
+                }
+
                 return this.getCorrectUrl(uri + qs);
             },
-
+            isOtherHost: function (route){
+                return route.host && route.host != window.location.hostname;
+            },
             replaceNamedParameters : function(uri, parameters) {
                 var regex = /\{(.*?)\??\}/g;
                 if (typeof parameters === 'string' || typeof parameters === 'number')
@@ -92,8 +98,9 @@
             getCorrectUrl: function (uri) {
                 var url = this.prefix + '/' + uri.replace(/^\/?/, '');
 
-                if(!this.absolute)
+                if ( ! this.absolute) {
                     return url;
+                }
 
                 return this.rootUrl.replace('/\/?$/', '') + url;
             }
