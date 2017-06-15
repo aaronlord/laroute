@@ -26,5 +26,12 @@
             "Lord\\Laroute\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lord\\Laroute\\LarouteServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev"
 }
