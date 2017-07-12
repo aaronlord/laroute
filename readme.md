@@ -107,6 +107,10 @@ return [
     */
     'ignore_uri' => '/^(opcache-api)/',
 
+    /**
+     * ignore routes without names from the output
+     */
+    'ignore_routes_without_names' => false
 ];
 
 ```
