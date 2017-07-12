@@ -17,12 +17,11 @@ class Collection extends \Illuminate\Support\Collection
      * Parse the routes into a jsonable output.
      *
      * @param RouteCollection $routes
-     * @param string          $filter
-     * @param string          $namespace
-     *
-     * @throws ZeroRoutesException
+     * @param string $filter
+     * @param string $namespace
      *
      * @return array
+     * @throws ZeroRoutesException
      */
     protected function parseRoutes(RouteCollection $routes, $filter, $namespace)
     {
@@ -38,7 +37,7 @@ class Collection extends \Illuminate\Support\Collection
     }
 
     /**
-     * Throw an exception if there aren't any routes to process.
+     * Throw an exception if there aren't any routes to process
      *
      * @param RouteCollection $routes
      *
@@ -68,29 +67,25 @@ class Collection extends \Illuminate\Support\Collection
 
         $host = $route->domain();
         $methods = $route->methods();
-        $uri = $route->uri();
-        $name = $route->getName();
-        $action = $route->getActionName();
+        $uri     = $route->uri();
+        $name    = $route->getName();
+        $action  = $route->getActionName();
         $laroute = array_get($route->getAction(), 'laroute', null);
 
-        if (!empty($namespace)) {
+        if(!empty($namespace)) {
             $a = $route->getAction();
 
-            if (isset($a['controller'])) {
+            if(isset($a['controller'])) {
                 $action = str_replace($namespace.'\\', '', $action);
             }
         }
 
         switch ($filter) {
             case 'all':
-                if ($laroute === false) {
-                    return null;
-                }
+                if($laroute === false) return null;
                 break;
             case 'only':
-                if ($laroute !== true) {
-                    return null;
-                }
+                if($laroute !== true) return null;
                 break;
         }
 
