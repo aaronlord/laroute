@@ -57,5 +57,5 @@ return [
     /*
     * ignore routes with certain urls through regex
     */
-    'ignore_uri' => '/^(opcache-api)/',
+    'ignore_uri' => '',
 ];
