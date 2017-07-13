@@ -15,9 +15,9 @@ Install the usual [composer](https://getcomposer.org/) way.
 ###### composer.json
 ```json
 {
-	"require" : {
-		"lord/laroute" : "2.*"
-	}
+    "require" : {
+        "lord/laroute" : "2.*"
+    }
 }
 ```
 
@@ -25,14 +25,14 @@ n.b Laravel 4.x users, check out [version 1.3.2](https://github.com/aaronlord/la
 
 ###### app/config/app.php
 ```php
-	...
-	
-	'providers' => array(
-		...
-		Lord\Laroute\LarouteServiceProvider::class,
-	],
-	
-	...
+    ...
+
+    'providers' => array(
+        ...
+        Lord\Laroute\LarouteServiceProvider::class,
+    ],
+
+    ...
 ```
 
 ### Configure (optional)
@@ -95,16 +95,20 @@ return [
      * with them.
      */
     'template' => 'vendor/lord/laroute/src/templates/laroute.js',
-    
+
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.
     *
     */
     'prefix' => '',
 
+    /*
+    * ignore routes with certain urls through regex
+    */
+    'ignore_uri' => '',
+
 ];
 
-    
 ```
 
 ### Generate the `laroute.js`
@@ -127,13 +131,12 @@ With the default configuration, this will create a `public/js/laroute.js` file t
 
 By default, all of the functions are under the `laroute` namespace. This documentation will stick with this convention.
 
-
 ### action
 
-Generate a URL for a given controller action. 
+Generate a URL for a given controller action.
 
 ```js
-/** 
+/**
  * laroute.action(action, [parameters = {}])
  *
  * action     : The action to route to.
@@ -154,7 +157,7 @@ Generate a URL for a given named route.
  * name       : The name of the route to route to.
  * parameters : Optional. key:value object literal of route parameters.
  */
- 
+
  laroute.route('Hello.{planet}', { planet : 'world' });
 ```
 
@@ -169,7 +172,7 @@ Generate a fully qualified URL to the given path.
  * name       : The name of the route to route to.
  * parameters : Optional. value array of route parameters.
  */
- 
+
  laroute.url('foo/bar', ['aaa', 'bbb']); // -> /foo/bar/aaa/bbb
 ```
 
@@ -185,7 +188,7 @@ Generate a html link to the given url.
  * title      : Optional. The anchor text to display
  * attributes : Optional. key:value object literal of additional html attributes.
  */
- 
+
  laroute.link_to('foo/bar', 'Foo Bar', { style : "color:#bada55;" });
 ```
 
@@ -202,7 +205,7 @@ Generate a html link to the given route.
  * parameters : Optional. key:value object literal of route parameters.
  * attributes : Optional. key:value object literal of additional html attributes.
  */
- 
+
  laroute.link_to_route('home', 'Home');
 ```
 
@@ -219,7 +222,7 @@ Generate a html link to the given action.
  * parameters : Optional. key:value object literal of route parameters.
  * attributes : Optional. key:value object literal of additional html attributes.
  */
- 
+
  laroute.link_to_action('HelloController@planet', undefined, { planet : 'world' });
 ```
 
@@ -241,7 +244,6 @@ Route::group(['laroute' => false], function () {
 });
 
 ```
-
 
 ## Licence
 
