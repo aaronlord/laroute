@@ -61,18 +61,13 @@ class Collection extends \Illuminate\Support\Collection
      */
     protected function getRouteInformation(Route $route, $filter, $namespace)
     {
-
         if (!empty(config('laroute.ignore_uri'))) {
             if (preg_match(config('laroute.ignore_uri'), $route->uri())) {
                 return;
             }
         }
 
-        if (config('laroute.ignore_routes_without_names') && !$route->getName()) {
-            return;
-        }
-
-        $host    = $route->domain();
+        $host = $route->domain();
         $methods = $route->methods();
         $uri     = $route->uri();
         $name    = $route->getName();
