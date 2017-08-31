@@ -68,7 +68,7 @@ class LarouteGeneratorCommand extends Command
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         try {
             $filePath = $this->generator->compile(
