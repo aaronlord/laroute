@@ -40,7 +40,7 @@ n.b Laravel 4.x users, check out [version 1.3.2](https://github.com/aaronlord/la
 Copy the packages config files.
 
 ```
-php artisan vendor:publish --provider='Lord\Laroute\LarouteServiceProvider'
+php artisan vendor:publish --provider="Lord\Laroute\LarouteServiceProvider"
 ```
 
 ###### app/config/packages/lord/laroute/config.php
