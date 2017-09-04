@@ -27,7 +27,7 @@ n.b Laravel 4.x users, check out [version 1.3.2](https://github.com/aaronlord/la
 ```php
 	...
 	
-	'providers' => array(
+	'providers' => [
 		...
 		Lord\Laroute\LarouteServiceProvider::class,
 	],
@@ -111,7 +111,7 @@ return [
 
 To access the routes, we need to "port" them over to a JavaScript file:
 
-```
+```bash
 php artisan laroute:generate
 ```
 
