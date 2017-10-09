@@ -8,9 +8,9 @@ use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
 
 class Collection extends \Illuminate\Support\Collection
 {
-    public function __construct(RouteCollection $routes, $filter, $namespace)
+    public function __construct(RouteCollection $routes, $filter, $namespace, $useActions = true)
     {
-        $this->items = $this->parseRoutes($routes, $filter, $namespace);
+        $this->items = $this->parseRoutes($routes, $filter, $namespace, $useActions);
     }
 
     /**
@@ -23,14 +23,14 @@ class Collection extends \Illuminate\Support\Collection
      * @return array
      * @throws ZeroRoutesException
      */
-    protected function parseRoutes(RouteCollection $routes, $filter, $namespace)
+    protected function parseRoutes(RouteCollection $routes, $filter, $namespace, $useActions)
     {
         $this->guardAgainstZeroRoutes($routes);
 
         $results = [];
 
         foreach ($routes as $route) {
-            $results[] = $this->getRouteInformation($route, $filter, $namespace);
+            $results[] = $this->getRouteInformation($route, $filter, $namespace, $useActions);
         }
 
         return array_values(array_filter($results));
@@ -59,20 +59,23 @@ class Collection extends \Illuminate\Support\Collection
      *
      * @return array
      */
-    protected function getRouteInformation(Route $route, $filter, $namespace)
+    protected function getRouteInformation(Route $route, $filter, $namespace, $useActions)
     {
         $host    = $route->domain();
         $methods = $route->methods();
         $uri     = $route->uri();
         $name    = $route->getName();
-        $action  = $route->getActionName();
+        $action = '';
         $laroute = array_get($route->getAction(), 'laroute', null);
 
-        if(!empty($namespace)) {
-            $a = $route->getAction();
+        if ($useActions) {
+            $action  = $route->getActionName();
+            if(!empty($namespace)) {
+                $a = $route->getAction();
 
-            if(isset($a['controller'])) {
-                $action = str_replace($namespace.'\\', '', $action);
+                if(isset($a['controller'])) {
+                    $action = str_replace($namespace.'\\', '', $action);
+                }
             }
         }
 

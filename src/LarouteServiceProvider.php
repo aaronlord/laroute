@@ -83,7 +83,7 @@ class LarouteServiceProvider extends ServiceProvider
             'command.laroute.generate',
             function ($app) {
                 $config     = $app['config'];
-                $routes     = new Routes($app['router']->getRoutes(), $config->get('laroute.filter', 'all'), $config->get('laroute.action_namespace', ''));
+                $routes     = new Routes($app['router']->getRoutes(), $config->get('laroute.filter', 'all'), $config->get('laroute.action_namespace', ''), $config->get('laroute.use_actions', true));
                 $generator  = $app->make('Lord\Laroute\Generators\GeneratorInterface');
 
                 return new LarouteGeneratorCommand($config, $routes, $generator);

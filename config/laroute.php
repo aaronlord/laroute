@@ -43,12 +43,18 @@ return [
     'action_namespace' => '',
 
     /*
+     * If we use the actions, this will expose the PHP classes and methods
+     * See: https://github.com/aaronlord/laroute/issues/58
+     */
+    'use_actions' => true,
+
+    /*
      * The path to the template `laroute.js` file. This is the file that contains
      * the ported helper Laravel url/route functions and the route data to go
      * with them.
      */
     'template' => 'vendor/lord/laroute/src/templates/laroute.js',
-    
+
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.
     *
