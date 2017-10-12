@@ -51,13 +51,16 @@ return [
     
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.
-    *
-    */
+     *
+     */
     'prefix' => '',
 
     /*
-     * what to exclude from the output file
-     * ex. ['action', 'methods', 'host']
+     * Array of strings which indicate which, if any, route properties should be excluded from the compiled file.
+     * Intended to reduce the bundled file size by excluding rote properties not being referenced in production.
+     *
+     * The array may left empty or may include one or any of the following:
+     * ['host', 'methods', 'uri', 'action', 'name']
      */
     'exclude' => [],
 
