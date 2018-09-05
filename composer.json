@@ -1,21 +1,25 @@
 {
-    "name": "lord/laroute",
+    "name": "richdynamix/laroute",
     "description": "Access Laravels URL/Route helper functions, from JavaScript.",
     "keywords"  : ["laravel", "routes", "routing", "javascript"],
     "authors": [
         {
             "name": "Aaron Lord",
             "email": "hello@aaronlord.is"
+        },
+        {
+            "name": "Steven Richardson",
+            "email": "steven@richdynamix.com"
         }
     ],
     "license" : "MIT",
     "require": {
         "php" : ">=5.4.0",
-        "illuminate/support" : "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
-        "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
-        "illuminate/console": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
-        "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
-        "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*"
+        "illuminate/support" : "~5.5",
+        "illuminate/routing": "~5.5",
+        "illuminate/console": "~5.5",
+        "illuminate/config": "~5.5",
+        "illuminate/filesystem": "~5.5"
     },
     "require-dev" : {
         "phpunit/phpunit" : "~4.0",
