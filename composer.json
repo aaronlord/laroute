@@ -1,5 +1,5 @@
 {
-    "name": "laugad/laroute",
+    "name": "lord/laroute",
     "description": "Access Laravels URL/Route helper functions, from JavaScript.",
     "keywords"  : ["laravel", "routes", "routing", "javascript"],
     "authors": [
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Laugad\\Laroute\\": "src/"
+            "Lord\\Laroute\\": "src/"
         }
     },
     "minimum-stability": "dev"
