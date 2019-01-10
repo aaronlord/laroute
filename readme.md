@@ -1,12 +1,6 @@
 # Laroute
 
-[Laravel](http://laravel.com/) has some pretty sweet [helper functions](http://laravel.com/docs/helpers#urls) for generating urls/links and its auto-json-magic makes it building APIs super easy. It's my go-to choice for building single-page js apps, but routing can quickly become a bit of a pain.
-
-Wouldn't it be amazing if we could access our Laravel routes from JavaScript?
-
-This package allows us to port our routes over to JavaScript, and gives us a bunch of _very familiar_ helper functions to use.
-
-![Laroute in action](laroute.png)
+Forked and adjusted version of [aaronlord/laroute](https://github.com/aaronlord/laroute).
 
 ## Installation
 
