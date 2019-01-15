@@ -100,5 +100,19 @@ export default {
         }
 
         return this.rootUrl.replace('/\/?$/', '') + url;
+    },
+
+    request(name, parameters, data, route) {
+        route = route || this.getByName(name);
+
+        if ( ! route ) {
+            return undefined;
+        }
+
+        return {
+            url: this.toRoute(route, parameters),
+            method: route.methods[0],
+            data: data || {}
+        };
     }
 };
