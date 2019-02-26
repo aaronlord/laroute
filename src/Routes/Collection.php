@@ -4,6 +4,7 @@ namespace Lord\Laroute\Routes;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Arr;
 use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
 
 class Collection extends \Illuminate\Support\Collection
@@ -66,7 +67,7 @@ class Collection extends \Illuminate\Support\Collection
         $uri     = $route->uri();
         $name    = $route->getName();
         $action  = $route->getActionName();
-        $laroute = array_get($route->getAction(), 'laroute', null);
+        $laroute = Arr::get($route->getAction(), 'laroute', null);
 
         if(!empty($namespace)) {
             $a = $route->getAction();
