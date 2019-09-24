@@ -1,12 +1,12 @@
 <?php
 
-namespace Lord\Laroute;
+namespace Noonic\Routejs;
 
 use Illuminate\Support\ServiceProvider;
-use Lord\Laroute\Console\Commands\LarouteGeneratorCommand;
-use Lord\Laroute\Routes\Collection as Routes;
+use Noonic\Routejs\Console\Commands\RoutejsGeneratorCommand;
+use Noonic\Routejs\Routes\Collection as Routes;
 
-class LarouteServiceProvider extends ServiceProvider
+class RoutejsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application events.
@@ -16,7 +16,7 @@ class LarouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $source = $this->getConfigPath();
-        $this->publishes([$source => config_path('laroute.php')], 'config');
+        $this->publishes([$source => config_path('routejs.php')], 'config');
     }
 
     /**
@@ -27,7 +27,7 @@ class LarouteServiceProvider extends ServiceProvider
     public function register()
     {
         $source = $this->getConfigPath();
-        $this->mergeConfigFrom($source, 'laroute');
+        $this->mergeConfigFrom($source, 'routejs');
 
         $this->registerGenerator();
 
@@ -43,7 +43,7 @@ class LarouteServiceProvider extends ServiceProvider
      */
     protected function getConfigPath()
     {
-        return realpath(__DIR__.'/../config/laroute.php');
+        return realpath(__DIR__.'/../config/routejs.php');
     }
 
     /**
@@ -54,8 +54,8 @@ class LarouteServiceProvider extends ServiceProvider
     protected function registerGenerator()
     {
         $this->app->bind(
-            'Lord\Laroute\Generators\GeneratorInterface',
-            'Lord\Laroute\Generators\TemplateGenerator'
+            'Noonic\Routejs\Generators\GeneratorInterface',
+            'Noonic\Routejs\Generators\TemplateGenerator'
         );
     }
 
@@ -67,8 +67,8 @@ class LarouteServiceProvider extends ServiceProvider
     protected function registerCompiler()
     {
         $this->app->bind(
-            'Lord\Laroute\Compilers\CompilerInterface',
-            'Lord\Laroute\Compilers\TemplateCompiler'
+            'Noonic\Routejs\Compilers\CompilerInterface',
+            'Noonic\Routejs\Compilers\TemplateCompiler'
         );
     }
 
@@ -83,10 +83,10 @@ class LarouteServiceProvider extends ServiceProvider
             'command.laroute.generate',
             function ($app) {
                 $config     = $app['config'];
-                $routes     = new Routes($app['router']->getRoutes(), $config->get('laroute.filter', 'all'), $config->get('laroute.action_namespace', ''));
-                $generator  = $app->make('Lord\Laroute\Generators\GeneratorInterface');
+                $routes     = new Routes($app['router']->getRoutes(), $config->get('routejs.filter', 'all'), $config->get('routejs.action_namespace', ''));
+                $generator  = $app->make('Noonic\Routejs\Generators\GeneratorInterface');
 
-                return new LarouteGeneratorCommand($config, $routes, $generator);
+                return new RoutejsGeneratorCommand($config, $routes, $generator);
             }
         );
 

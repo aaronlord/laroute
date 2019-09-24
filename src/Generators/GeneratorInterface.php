@@ -1,9 +1,9 @@
 <?php
 
-namespace Lord\Laroute\Generators;
+namespace Noonic\Routejs\Generators;
 
 use Illuminate\Filesystem\Filesystem;
-use Lord\Laroute\Compilers\CompilerInterface as Compiler;
+use Noonic\Routejs\Compilers\CompilerInterface as Compiler;
 
 interface GeneratorInterface
 {

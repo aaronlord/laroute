@@ -1,6 +1,6 @@
 <?php
 
-namespace Lord\Laroute\Compilers;
+namespace Noonic\Routejs\Compilers;
 
 interface CompilerInterface
 {

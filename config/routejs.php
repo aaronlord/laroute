@@ -10,13 +10,13 @@ return [
     /*
      * The destination filename for the javascript file.
      */
-    'filename' => 'laroute',
+    'filename' => 'routejs',
 
     /*
      * The namespace for the helper functions. By default this will bind them to
-     * `window.laroute`.
+     * `window.routejs`.
      */
-    'namespace' => 'laroute',
+    'namespace' => 'routejs',
 
     /*
      * Generate absolute URLs
@@ -28,9 +28,9 @@ return [
     /*
      * The Filter Method
      *
-     * 'all' => All routes except "'laroute' => false"
-     * 'only' => Only "'laroute' => true" routes
-     * 'force' => All routes, ignored "laroute" route parameter
+     * 'all' => All routes except "'routejs' => false"
+     * 'only' => Only "'routejs' => true" routes
+     * 'force' => All routes, ignored "routejs" route parameter
      */
     'filter' => 'all',
 
@@ -43,11 +43,11 @@ return [
     'action_namespace' => '',
 
     /*
-     * The path to the template `laroute.js` file. This is the file that contains
+     * The path to the template `routejs.js` file. This is the file that contains
      * the ported helper Laravel url/route functions and the route data to go
      * with them.
      */
-    'template' => 'vendor/lord/laroute/src/templates/laroute.js',
+    'template' => 'vendor/noonic/routejs/src/templates/routejs.js',
     
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.

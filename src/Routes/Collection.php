@@ -1,11 +1,11 @@
 <?php
 
-namespace Lord\Laroute\Routes;
+namespace Noonic\Routejs\Routes;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
-use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
+use Noonic\Routejs\Routes\Exceptions\ZeroRoutesException;
 
 class Collection extends \Illuminate\Support\Collection
 {

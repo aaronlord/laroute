@@ -1,23 +1,23 @@
 <?php
 
-namespace Lord\Laroute\Console\Commands;
+namespace Noonic\Routejs\Console\Commands;
 
-use Lord\Laroute\Routes\Collection as Routes;
-use Lord\Laroute\Generators\GeneratorInterface as Generator;
+use Noonic\Routejs\Routes\Collection as Routes;
+use Noonic\Routejs\Generators\GeneratorInterface as Generator;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Console\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 
-class LarouteGeneratorCommand extends Command
+class RoutejsGeneratorCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'laroute:generate';
+    protected $name = 'routejs:generate';
 
     /**
      * The console command description.
