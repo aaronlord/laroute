@@ -10,7 +10,7 @@ interface GeneratorInterface
     /**
      * Create a new template generator instance.
      *
-     * @param $compiler   \Lord\Laroute\Compilers\CompilerInterface
+     * @param $compiler   \Noonic\Routejs\Compilers\CompilerInterface
      * @param $filesystem \Illuminate\Filesystem\Filesystem
      *
      */

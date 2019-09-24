@@ -1,6 +1,6 @@
 (function () {
 
-    var laroute = (function () {
+    var routejs = (function () {
 
         var routes = {
 
@@ -181,14 +181,14 @@
      */
     if (typeof define === 'function' && define.amd) {
         define(function () {
-            return laroute;
+            return routejs;
         });
     }
     else if (typeof module === 'object' && module.exports){
-        module.exports = laroute;
+        module.exports = routejs;
     }
     else {
-        window.$NAMESPACE$ = laroute;
+        window.$NAMESPACE$ = routejs;
     }
 
 }).call(this);
