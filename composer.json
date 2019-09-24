@@ -1,21 +1,25 @@
 {
-    "name": "lord/laroute",
+    "name": "Noonic/routejs",
     "description": "Access Laravels URL/Route helper functions, from JavaScript.",
     "keywords"  : ["laravel", "routes", "routing", "javascript"],
     "authors": [
         {
             "name": "Aaron Lord",
             "email": "hello@aaronlord.is"
+        },
+        {
+            "name": "Sebastiano Favaro",
+            "email": "s.favaro@noonic.com"
         }
     ],
     "license" : "MIT",
     "require": {
-        "php" : ">=5.4.0",
-        "illuminate/support" : "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
-        "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
-        "illuminate/console": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
-        "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
-        "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*"
+        "php" : ">=7.0.0",
+        "illuminate/support" : "6.0.*",
+        "illuminate/routing": "6.0.*",
+        "illuminate/console": "6.0.*",
+        "illuminate/config": "6.0.*",
+        "illuminate/filesystem": "6.0.*"
     },
     "require-dev" : {
         "phpunit/phpunit" : "~4.0",
@@ -23,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Lord\\Laroute\\": "src/"
+            "Noonic\\Routejs\\": "src/"
         }
     },
     "minimum-stability": "dev"
