@@ -1,5 +1,5 @@
 {
-    "name": "lord/laroute",
+    "name": "webakula/laroute-1",
     "description": "Access Laravels URL/Route helper functions, from JavaScript.",
     "keywords"  : ["laravel", "routes", "routing", "javascript"],
     "authors": [
