@@ -9,6 +9,8 @@ use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
 
 class Collection extends \Illuminate\Support\Collection
 {
+    protected static $routeProperties = ['host', 'methods', 'uri', 'action', 'name'];
+
     public function __construct(RouteCollection $routes, $filter, $namespace)
     {
         $this->items = $this->parseRoutes($routes, $filter, $namespace);
@@ -86,7 +88,7 @@ class Collection extends \Illuminate\Support\Collection
                 break;
         }
 
-        return compact('host', 'methods', 'uri', 'name', 'action');
+        return compact(array_diff(static::$routeProperties, config('laroute.exclude')));
     }
 
 }
