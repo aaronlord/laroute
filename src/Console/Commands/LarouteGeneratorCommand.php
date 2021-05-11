@@ -78,7 +78,7 @@ class LarouteGeneratorCommand extends Command
             );
 
             $this->info("Created: {$filePath}");
-        } catch (\Exception $e) {
+        } catch (\Exception $e){
             $this->error($e->getMessage());
         }
     }
@@ -103,10 +103,11 @@ class LarouteGeneratorCommand extends Command
         $namespace  = $this->getOptionOrConfig('namespace');
         $routes     = $this->routes->toJSON();
         $absolute   = $this->config->get('laroute.absolute', false);
+        $secureUrl  = $this->config->get('laroute.secure_url', true);
         $rootUrl    = $this->config->get('app.url', '');
         $prefix		= $this->config->get('laroute.prefix', '');
 
-        return compact('namespace', 'routes', 'absolute', 'rootUrl', 'prefix');
+        return compact('namespace', 'routes', 'absolute', 'secureUrl', 'rootUrl', 'prefix');
     }
 
 
