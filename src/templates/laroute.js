@@ -8,6 +8,7 @@
             rootUrl: '$ROOTURL$',
             routes : $ROUTES$,
             prefix: '$PREFIX$',
+            parameters: window.larouteParameters || {},
 
             route : function (name, parameters, route) {
                 route = route || this.getByName(name);
@@ -127,7 +128,7 @@
             // Generate a url for a given controller action.
             // $NAMESPACE$.action('HomeController@getIndex', [params = {}])
             action : function (name, parameters) {
-                parameters = parameters || {};
+                parameters = Object.assign({}, routes.parameters, parameters || {});
 
                 return routes.route(name, parameters, routes.getByAction(name));
             },
@@ -135,7 +136,7 @@
             // Generate a url for a given named route.
             // $NAMESPACE$.route('routeName', [params = {}])
             route : function (route, parameters) {
-                parameters = parameters || {};
+                parameters = Object.assign({}, routes.parameters, parameters || {});
 
                 return routes.route(route, parameters);
             },
@@ -143,7 +144,7 @@
             // Generate a fully qualified URL to the given path.
             // $NAMESPACE$.route('url', [params = {}])
             url : function (route, parameters) {
-                parameters = parameters || {};
+                parameters = Object.assign({}, routes.parameters, parameters || {});
 
                 return routes.url(route, parameters);
             },
