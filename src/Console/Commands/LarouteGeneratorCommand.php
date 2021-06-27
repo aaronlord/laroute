@@ -101,7 +101,7 @@ class LarouteGeneratorCommand extends Command
     protected function getTemplateData()
     {
         $namespace  = $this->getOptionOrConfig('namespace');
-        $routes     = $this->routes->toJSON();
+        $routes     = $this->routes->toJson();
         $absolute   = $this->config->get('laroute.absolute', false);
         $rootUrl    = $this->config->get('app.url', '');
         $prefix		= $this->config->get('laroute.prefix', '');
