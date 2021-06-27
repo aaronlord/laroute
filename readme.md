@@ -73,7 +73,7 @@ return [
     'absolute' => false,
 
     /*
-     * The Filter Methode
+     * The Filter Method
      *
      * 'all' => All routes except "'laroute' => false"
      * 'only' => Only "'laroute' => true" routes
