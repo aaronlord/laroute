@@ -24,7 +24,7 @@ class Collection extends \Illuminate\Support\Collection
      * @return array
      * @throws ZeroRoutesException
      */
-    protected function parseRoutes(RouteCollection $routes, $filter, $namespace)
+    protected function parseRoutes($routes, $filter, $namespace)
     {
         $this->guardAgainstZeroRoutes($routes);
 
@@ -44,7 +44,7 @@ class Collection extends \Illuminate\Support\Collection
      *
      * @throws ZeroRoutesException
      */
-    protected function guardAgainstZeroRoutes(RouteCollection $routes)
+    protected function guardAgainstZeroRoutes($routes)
     {
         if (count($routes) < 1) {
             throw new ZeroRoutesException("You don't have any routes!");
