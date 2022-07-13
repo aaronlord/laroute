@@ -1,7 +1,7 @@
 <?php
 
 namespace Lord\Laroute\Routes;
-
+//
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
