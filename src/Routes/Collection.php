@@ -9,7 +9,7 @@ use Lord\Laroute\Routes\Exceptions\ZeroRoutesException;
 
 class Collection extends \Illuminate\Support\Collection
 {
-    public function __construct(RouteCollection $routes, $filter, $namespace)
+    public function __construct($routes, $filter, $namespace)
     {
         $this->items = $this->parseRoutes($routes, $filter, $namespace);
     }
