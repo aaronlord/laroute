@@ -2,6 +2,7 @@
 
 namespace Lord\Laroute;
 
+use Illuminate\Routing\Route;
 use Illuminate\Support\ServiceProvider;
 use Lord\Laroute\Console\Commands\LarouteGeneratorCommand;
 use Lord\Laroute\Routes\Collection as Routes;
@@ -17,6 +18,12 @@ class LarouteServiceProvider extends ServiceProvider
     {
         $source = $this->getConfigPath();
         $this->publishes([$source => config_path('laroute.php')], 'config');
+
+        Route::macro('laroute', function() {
+            $this->setAction(array_merge($this->getAction(), ['laroute' => true]));
+
+            return $this;
+        });
     }
 
     /**
