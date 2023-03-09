@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * The destination path for the javascript file.
      */
@@ -26,6 +25,12 @@ return [
     'absolute' => false,
 
     /*
+     * Generate secure absolute URLs (requires absolute=true)
+     * This will determine which scheme to use on your routes (http or https)
+     */
+    'secure_url' => true,
+
+    /*
      * The Filter Method
      *
      * 'all' => All routes except "'laroute' => false"
@@ -48,11 +53,16 @@ return [
      * with them.
      */
     'template' => 'vendor/lord/laroute/src/templates/laroute.js',
-    
+
     /*
      * Appends a prefix to URLs. By default the prefix is an empty string.
     *
     */
     'prefix' => '',
 
+    /*
+     * what to exclude from the output file
+     * ex. ['action', 'methods', 'host']
+     */
+    'exclude' => [],
 ];
